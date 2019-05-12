@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QFileDialog>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -17,26 +19,64 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionNew_triggered()
 {
     // create new file
+    _fileName = "new";
+    ui->plainTextEdit->clear();
 }
 
 void MainWindow::on_actionOpen_triggered()
 {
     // open file
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open a file"));
+
+    if (fileName.isEmpty()) return;
+
+    QFile file(fileName);
+
+    if (file.open(QFile::ReadOnly | QFile::Text))
+    {
+        QTextStream in(&file);
+        QString text = in.readAll();
+        ui->plainTextEdit->setPlainText(text);
+
+        _fileName = fileName;
+        file.close();
+    }
 }
 
 void MainWindow::on_actionClose_triggered()
 {
     // close file
+    on_actionNew_triggered();
 }
 
 void MainWindow::on_actionSave_triggered()
 {
     // save file
+    QFile file(_fileName);
+
+    if(file.open(QFile::WriteOnly | QFile::Text))
+    {
+        QTextStream out(&file);
+        out << ui->plainTextEdit->toPlainText();
+
+        file.flush();
+        file.close();
+    }
 }
 
 void MainWindow::on_actionSave_as_triggered()
 {
     // save file as...
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as..."), _fileName,
+                                                    tr("All types (*.*);;"
+                                                       "Normal text file (*.txt;*.lol);;"
+                                                       "C source file (*.c;*.h);;"
+                                                       "C++ source file (*.cpp;*.hpp)"));
+
+    if (fileName.isEmpty()) return;
+
+    _fileName = fileName;
+    on_actionSave_triggered();
 }
 
 void MainWindow::on_actionUndo_triggered()
