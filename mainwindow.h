@@ -45,6 +45,12 @@ private slots:
 
     void on_actionSelect_all_triggered();
 
+    void on_plainTextEdit_undoAvailable(bool b);
+
+    void on_plainTextEdit_redoAvailable(bool b);
+
+    void on_plainTextEdit_copyAvailable(bool b);
+
 private:
     Ui::MainWindow *ui;
 

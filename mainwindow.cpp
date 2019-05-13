@@ -130,3 +130,18 @@ void MainWindow::on_actionPrefereces_triggered()
 {
     // preferences
 }
+
+void MainWindow::on_plainTextEdit_undoAvailable(bool b)
+{
+    ui->actionUndo->setEnabled(b);
+}
+
+void MainWindow::on_plainTextEdit_redoAvailable(bool b)
+{
+    ui->actionRedo->setEnabled(b);
+}
+
+void MainWindow::on_plainTextEdit_copyAvailable(bool b)
+{
+    ui->actionCopy->setEnabled(b);
+}
