@@ -9,6 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setCentralWidget(ui->plainTextEdit);
+
+    settings = new SettingsWindow(this);
+    settings->setPointers(ui->mainToolBar, ui->statusBar);
 }
 
 MainWindow::~MainWindow()
@@ -129,6 +132,7 @@ void MainWindow::on_actionSelect_all_triggered()
 void MainWindow::on_actionPrefereces_triggered()
 {
     // preferences
+    settings->show();
 }
 
 void MainWindow::on_plainTextEdit_undoAvailable(bool b)

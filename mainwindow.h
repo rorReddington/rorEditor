@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QtCore>
+#include <QFileDialog>
+
+#include <settingswindow.h>
 
 namespace Ui {
 class MainWindow;
@@ -53,6 +56,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    SettingsWindow *settings;
 
     QString _fileName;
 };

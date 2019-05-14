@@ -25,14 +25,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        compilingsettingsform.cpp \
+        generalsettingsform.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        settingswindow.cpp \
+        stylesettingsform.cpp
 
 HEADERS += \
-        mainwindow.h
+        compilingsettingsform.h \
+        generalsettingsform.h \
+        mainwindow.h \
+        settingswindow.h \
+        stylesettingsform.h
 
 FORMS += \
-        mainwindow.ui
+        compilingsettingsform.ui \
+        generalsettingsform.ui \
+        mainwindow.ui \
+        settingswindow.ui \
+        stylesettingsform.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

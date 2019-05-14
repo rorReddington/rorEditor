@@ -72,7 +72,7 @@
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="title">
      <string>Settings</string>
