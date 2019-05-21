@@ -17,7 +17,9 @@ public:
     explicit GeneralSettingsForm(QWidget *parent = nullptr);
     ~GeneralSettingsForm();
 
-    void setPointers(QToolBar* tool, QStatusBar* status);
+signals:
+   void toolBarEnable_stateChange(int a);
+   void statusBarEnable_stateChange(int a);
 
 private slots:
     void on_checkBoxStatusBarHide_stateChanged(int arg1);
@@ -26,9 +28,6 @@ private slots:
 
 private:
     Ui::GeneralSettingsForm *ui;
-
-    QToolBar *toolBar;
-    QStatusBar *statusBar;
 };
 
 #endif // GENERALSETTINGSFORM_H

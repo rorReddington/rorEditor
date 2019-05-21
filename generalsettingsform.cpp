@@ -9,6 +9,9 @@ GeneralSettingsForm::GeneralSettingsForm(QWidget *parent) :
 
     ui->comboBoxLanguage->addItem("English");
     ui->comboBoxLanguage->setEnabled(false);
+
+    QObject::connect(this, SIGNAL(statusBarEnable_stateChange(int)), parent, SLOT(on_statusBarEnable_stateChange(int)));
+    QObject::connect(this, SIGNAL(toolBarEnable_stateChange(int)), parent, SLOT(on_toolBarEnable_stateChange(int)));
 }
 
 GeneralSettingsForm::~GeneralSettingsForm()
@@ -16,20 +19,14 @@ GeneralSettingsForm::~GeneralSettingsForm()
     delete ui;
 }
 
-void GeneralSettingsForm::setPointers(QToolBar *tool, QStatusBar *status)
-{
-    toolBar = tool;
-    statusBar = status;
-}
-
 void GeneralSettingsForm::on_checkBoxStatusBarHide_stateChanged(int arg1)
 {
     // StatusBar hide
-    arg1 ? statusBar->hide() : statusBar->show();
+    emit statusBarEnable_stateChange(arg1);
 }
 
 void GeneralSettingsForm::on_checkBoxToolBarHide_stateChanged(int arg1)
 {
     // ToolBar hide
-    arg1 ? toolBar->hide() : toolBar->show();
+    emit toolBarEnable_stateChange(arg1);
 }

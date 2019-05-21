@@ -29,6 +29,7 @@ SOURCES += \
         generalsettingsform.cpp \
         main.cpp \
         mainwindow.cpp \
+        settings.cpp \
         settingswindow.cpp \
         stylesettingsform.cpp
 
@@ -36,6 +37,7 @@ HEADERS += \
         compilingsettingsform.h \
         generalsettingsform.h \
         mainwindow.h \
+        settings.h \
         settingswindow.h \
         stylesettingsform.h
 

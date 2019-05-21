@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setCentralWidget(ui->plainTextEdit);
 
     settings = new SettingsWindow(this);
-    settings->setPointers(ui->mainToolBar, ui->statusBar);
 }
 
 MainWindow::~MainWindow()
@@ -148,4 +147,27 @@ void MainWindow::on_plainTextEdit_redoAvailable(bool b)
 void MainWindow::on_plainTextEdit_copyAvailable(bool b)
 {
     ui->actionCopy->setEnabled(b);
+}
+
+void MainWindow::on_toolBar_hidde(bool arg)
+{
+    arg ? ui->mainToolBar->show() : ui->mainToolBar->hide();
+}
+
+void MainWindow::on_statusBar_hidde(bool arg)
+{
+    arg ? ui->statusBar->show() : ui->statusBar->hide();
+}
+
+void MainWindow::on_plainTextEdit_fontChange(const QString &arg)
+{
+    QFont font(arg, 12);
+    ui->plainTextEdit->setFont(font);
+}
+
+void MainWindow::on_plainTextEdit_fontSizeChange(int arg)
+{
+    auto font = ui->plainTextEdit->font();
+    font.setPointSize(arg);
+    ui->plainTextEdit->setFont(font);
 }

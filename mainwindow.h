@@ -54,6 +54,14 @@ private slots:
 
     void on_plainTextEdit_copyAvailable(bool b);
 
+    void on_toolBar_hidde(bool arg);
+
+    void on_statusBar_hidde(bool arg);
+
+    void on_plainTextEdit_fontChange(const QString &arg);
+
+    void on_plainTextEdit_fontSizeChange(int arg);
+
 private:
     Ui::MainWindow *ui;
     SettingsWindow *settings;
