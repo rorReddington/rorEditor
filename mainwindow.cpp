@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->plainTextEdit->setTabStopDistance(40);
 
     settings = new Settings();
+    compiler = new Compiler(settings->compiler->getPath());
 
     settingsWindow = new SettingsWindow(this);
 }
@@ -139,6 +140,18 @@ void MainWindow::on_actionPrefereces_triggered()
     settingsWindow->show();
 }
 
+void MainWindow::on_actionBuild_triggered()
+{
+    // compiling
+    compiler->compiling(_fileName);
+}
+
+void MainWindow::on_actionBuild_with_parameters_triggered()
+{
+    // compiling with params
+    compiler->compiling(_fileName, settings->compiler->getParams());
+}
+
 void MainWindow::on_plainTextEdit_undoAvailable(bool b)
 {
     ui->actionUndo->setEnabled(b);
@@ -193,4 +206,15 @@ void MainWindow::on_plainTextEdit_backgroundColorChange(QColor color)
     settings->style->setBackgroundColor(color);
     QString qss = QString("QPlainTextEdit{background-color: %1; color: %2;}").arg(color.name(), settings->style->getFontColor().name());
     ui->plainTextEdit->setStyleSheet(qss);
+}
+
+void MainWindow::on_changeCompiler(const QString str)
+{
+    settings->compiler->setPath(str);
+    compiler->changePath(str);
+}
+
+void MainWindow::on_changeCompilingParams(const QString str)
+{
+    settings->compiler->setParams(str);
 }

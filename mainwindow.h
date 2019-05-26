@@ -6,6 +6,7 @@
 #include <QFileDialog>
 
 #include <settingswindow.h>
+#include <compiler.h>
 
 namespace Ui {
 class MainWindow;
@@ -66,11 +67,20 @@ private slots:
 
     void on_plainTextEdit_backgroundColorChange(QColor color);
 
+    void on_changeCompilingParams(const QString);
+
+    void on_changeCompiler(const QString);
+
+    void on_actionBuild_triggered();
+
+    void on_actionBuild_with_parameters_triggered();
+
 private:
     Ui::MainWindow *ui;
     SettingsWindow *settingsWindow;
 
     Settings *settings;
+    Compiler *compiler;
     QString _fileName;
 };
 

@@ -16,8 +16,15 @@ public:
     explicit CompilingSettingsForm(QWidget *parent = nullptr);
     ~CompilingSettingsForm();
 
+signals:
+    void changeCompilingParams(const QString);
+    void changeCompiler(const QString);
+
 private slots:
     void on_toolButton_clicked();
+    void on_lineEditParams_editingFinished();
+
+    void on_lineEditCompiler_editingFinished();
 
 private:
     Ui::CompilingSettingsForm *ui;

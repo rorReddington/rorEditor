@@ -79,8 +79,16 @@
     </property>
     <addaction name="actionPrefereces"/>
    </widget>
+   <widget class="QMenu" name="menuBuild">
+    <property name="title">
+     <string>Build</string>
+    </property>
+    <addaction name="actionBuild"/>
+    <addaction name="actionBuild_with_parameters"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuBuild"/>
    <addaction name="menuEncoding"/>
    <addaction name="menuSettings"/>
   </widget>
@@ -239,6 +247,22 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionBuild">
+   <property name="text">
+    <string>Build</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+B</string>
+   </property>
+  </action>
+  <action name="actionBuild_with_parameters">
+   <property name="text">
+    <string>Build with parameters</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+B</string>
    </property>
   </action>
  </widget>

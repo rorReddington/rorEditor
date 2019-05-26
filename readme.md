@@ -9,7 +9,7 @@ rorEditor is a source code editor...
 ## TODO
 * Develop a graphical interface using Qt <b>[-]</b>
 * Method to create, open and save files <b>[+]</b>
-* Compiling with parameters <b>[-]</b>
+* Compiling with parameters <b>[+]</b>
 * Advanced setting (select font, background and text color) <b>[+]</b>
 * Customizable syntax highlighting <b>[-]</b>
 * Encoding support <b>[-]</b>
@@ -17,3 +17,4 @@ rorEditor is a source code editor...
 * Tabs support <b>[-]</b>
 * Search, replace support <b>[-]</b> 
 * Regex search and replace support <b>[-]</b>
+* Save settings <b>[-]</b>

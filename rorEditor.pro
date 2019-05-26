@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        compiler.cpp \
         compilingsettingsform.cpp \
         generalsettingsform.cpp \
         main.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
         stylesettingsform.cpp
 
 HEADERS += \
+        compiler.h \
         compilingsettingsform.h \
         generalsettingsform.h \
         mainwindow.h \
