@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setCentralWidget(ui->plainTextEdit);
 
     ui->plainTextEdit->setTabStopDistance(40);
+    ui->plainTextEdit->setWordWrapMode(QTextOption::WrapMode::NoWrap);
 
     settings = new Settings();
     compiler = new Compiler(settings->compiler->getPath());
@@ -20,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    delete settings;
+    delete compiler;
     delete settingsWindow;
     delete ui;
 }
@@ -197,14 +200,14 @@ void MainWindow::on_plainTextEdit_fontSizeChange(int arg)
 void MainWindow::on_plainTextEdit_fontColorChange(QColor color)
 {
     settings->style->setFontColor(color);
-    QString qss = QString("QPlainTextEdit{color: %1; background-color: %2;l}").arg(color.name(), settings->style->getBackgroundColor().name());
+    QString qss = QString("QPlainTextEdit{color: %1; background-color: %2;l}").arg(color.name()).arg(settings->style->getBackgroundColor().name());
     ui->plainTextEdit->setStyleSheet(qss);
 }
 
 void MainWindow::on_plainTextEdit_backgroundColorChange(QColor color)
 {
     settings->style->setBackgroundColor(color);
-    QString qss = QString("QPlainTextEdit{background-color: %1; color: %2;}").arg(color.name(), settings->style->getFontColor().name());
+    QString qss = QString("QPlainTextEdit{background-color: %1; color: %2;}").arg(color.name()).arg(settings->style->getFontColor().name());
     ui->plainTextEdit->setStyleSheet(qss);
 }
 
@@ -217,4 +220,24 @@ void MainWindow::on_changeCompiler(const QString str)
 void MainWindow::on_changeCompilingParams(const QString str)
 {
     settings->compiler->setParams(str);
+}
+
+void MainWindow::updateStatusBar()
+{
+    int length = ui->plainTextEdit->toPlainText().length();
+    int lines = ui->plainTextEdit->document()->blockCount();
+    int sLength = ui->plainTextEdit->textCursor().selectedText().length();
+
+    auto str = QString("length : %1 \\ lines : %2 \\ sLength : %3").arg(length).arg(lines).arg(sLength);
+    ui->statusBar->showMessage(str);
+}
+
+void MainWindow::on_plainTextEdit_textChanged()
+{
+    updateStatusBar();
+}
+
+void MainWindow::on_plainTextEdit_selectionChanged()
+{
+    updateStatusBar();
 }

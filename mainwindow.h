@@ -75,6 +75,10 @@ private slots:
 
     void on_actionBuild_with_parameters_triggered();
 
+    void on_plainTextEdit_textChanged();
+
+    void on_plainTextEdit_selectionChanged();
+
 private:
     Ui::MainWindow *ui;
     SettingsWindow *settingsWindow;
@@ -82,6 +86,8 @@ private:
     Settings *settings;
     Compiler *compiler;
     QString _fileName;
+
+    void updateStatusBar();
 };
 
 #endif // MAINWINDOW_H
