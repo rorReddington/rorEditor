@@ -54,18 +54,23 @@ private slots:
 
     void on_plainTextEdit_copyAvailable(bool b);
 
-    void on_toolBar_hidde(bool arg);
+    void on_toolBarEnable_stateChange(bool b);
 
-    void on_statusBar_hidde(bool arg);
+    void on_statusBarEnable_stateChange(bool b);
 
     void on_plainTextEdit_fontChange(const QString &arg);
 
     void on_plainTextEdit_fontSizeChange(int arg);
 
+    void on_plainTextEdit_fontColorChange(QColor color);
+
+    void on_plainTextEdit_backgroundColorChange(QColor color);
+
 private:
     Ui::MainWindow *ui;
-    SettingsWindow *settings;
+    SettingsWindow *settingsWindow;
 
+    Settings *settings;
     QString _fileName;
 };
 

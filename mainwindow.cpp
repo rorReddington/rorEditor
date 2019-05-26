@@ -10,11 +10,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setCentralWidget(ui->plainTextEdit);
 
-    settings = new SettingsWindow(this);
+    ui->plainTextEdit->setTabStopDistance(40);
+
+    settings = new Settings();
+
+    settingsWindow = new SettingsWindow(this);
 }
 
 MainWindow::~MainWindow()
 {
+    delete settingsWindow;
     delete ui;
 }
 
@@ -131,7 +136,7 @@ void MainWindow::on_actionSelect_all_triggered()
 void MainWindow::on_actionPrefereces_triggered()
 {
     // preferences
-    settings->show();
+    settingsWindow->show();
 }
 
 void MainWindow::on_plainTextEdit_undoAvailable(bool b)
@@ -149,25 +154,43 @@ void MainWindow::on_plainTextEdit_copyAvailable(bool b)
     ui->actionCopy->setEnabled(b);
 }
 
-void MainWindow::on_toolBar_hidde(bool arg)
+void MainWindow::on_toolBarEnable_stateChange(bool b)
 {
-    arg ? ui->mainToolBar->show() : ui->mainToolBar->hide();
+    settings->toolBar->setEnable(b);
+    b ? ui->mainToolBar->show() : ui->mainToolBar->hide();
 }
 
-void MainWindow::on_statusBar_hidde(bool arg)
+void MainWindow::on_statusBarEnable_stateChange(bool b)
 {
-    arg ? ui->statusBar->show() : ui->statusBar->hide();
+    settings->statusBar->setEnable(b);
+    b ? ui->statusBar->show() : ui->statusBar->hide();
 }
 
 void MainWindow::on_plainTextEdit_fontChange(const QString &arg)
 {
+    settings->style->setFont(arg);
     QFont font(arg, 12);
     ui->plainTextEdit->setFont(font);
 }
 
 void MainWindow::on_plainTextEdit_fontSizeChange(int arg)
 {
+    settings->style->setFontSize(arg);
     auto font = ui->plainTextEdit->font();
     font.setPointSize(arg);
     ui->plainTextEdit->setFont(font);
+}
+
+void MainWindow::on_plainTextEdit_fontColorChange(QColor color)
+{
+    settings->style->setFontColor(color);
+    QString qss = QString("QPlainTextEdit{color: %1; background-color: %2;l}").arg(color.name(), settings->style->getBackgroundColor().name());
+    ui->plainTextEdit->setStyleSheet(qss);
+}
+
+void MainWindow::on_plainTextEdit_backgroundColorChange(QColor color)
+{
+    settings->style->setBackgroundColor(color);
+    QString qss = QString("QPlainTextEdit{background-color: %1; color: %2;}").arg(color.name(), settings->style->getFontColor().name());
+    ui->plainTextEdit->setStyleSheet(qss);
 }

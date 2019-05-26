@@ -18,13 +18,12 @@ public:
     ~GeneralSettingsForm();
 
 signals:
-   void toolBarEnable_stateChange(int a);
-   void statusBarEnable_stateChange(int a);
+   void toolBarEnable_stateChange(bool);
+   void statusBarEnable_stateChange(bool);
 
 private slots:
-    void on_checkBoxStatusBarHide_stateChanged(int arg1);
-
-    void on_checkBoxToolBarHide_stateChanged(int arg1);
+   void on_checkBoxStatusBarHide_stateChanged(int arg1);
+   void on_checkBoxToolBarHide_stateChanged(int arg1);
 
 private:
     Ui::GeneralSettingsForm *ui;
